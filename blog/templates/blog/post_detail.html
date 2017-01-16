@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+	<div class="post">
+		{% if user.is_authenticated %}
+			<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+		{% endif %}
+		<h2>{{ post.title }}</h2>
+		<p>{{ post.text|linebreaks }}</p>
+		{% if post.title == "Εγχειρίδιο χρήσης Ηλεκτρονικής Υποβολής ΠΔΕ" %}
+			{% include 'blog/loading.html' %}
+			{% include 'blog/hl_yp_egx.html' %}
+		{% endif %}
+		{% if post.title == "Στοιχεία επικοινωνίας στελεχών ΠΔΕ" %}
+			{% include 'blog/loading.html' %}
+			{% include 'blog/pde_users.html' %}
+		{% endif %}
+		{% if post.title == "Physics -> Import data from websites to Matplotlib" %}
+			{% include 'blog/loading.html' %}
+			<h5>Note: Use Firefox, Chrome or Opera as web browsers for viewing the live graphs.</h5>
+			{% include 'blog/inst_strip_table.html' %}
+		{% endif %}
+		{% if post.published_date %}
+		<div class="date">
+			{{ post.published_date }}
+		</div>
+		{% endif %}
+	</div>
+{% endblock %}
